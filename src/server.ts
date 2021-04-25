@@ -13,8 +13,8 @@ app.set("views", path.join(__dirname, "..", "public"));
 app.engine("html", require("ejs").renderFile);
 app.set("view engine", "html");
 
-app.get("/", (request, response) => {
-  return
+app.get("/pages/client", (request, response) => {
+  return response.render("html/client.html")
 })
 
 const http = createServer(app); // Creating hyper text transfer protocol - http
