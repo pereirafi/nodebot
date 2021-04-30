@@ -56,7 +56,7 @@ function call(id) {
       } else {
         createDiv.className = "admin_message_admin";
 
-        createDiv.innerHTML = `Atendente: <span>${message.text}</span>`;
+        createDiv.innerHTML = `Agent: <span>${message.text}</span>`;
         createDiv.innerHTML += `<span class="admin_date>${dayjs(
           message.created_at
         ).format("DD/MM/YYYY HH:mm:ss")}`;
@@ -73,9 +73,22 @@ function sendMessage(id) {
   const text = document.getElementById(`send_message_${id}`);
 
   const params = {
-    text: text.nodeValue,
+    text: text.value,
     user_id: id
-  }
+  };
 
   socket.emit("admin_send_message", params);
+
+  const divMessages = document.getElementById(`allMessages${id}`);
+  const createDiv = document.createElement("div");
+  createDiv.className = "admin_message_admin";
+
+  createDiv.innerHTML = `Agent: <span>${params.text}</span>`;
+  createDiv.innerHTML += `<span class="admin_date>${dayjs(
+  ).format("DD/MM/YYYY HH:mm:ss")}`;
+
+  divMessages.appendChild(createDiv);
+
+  text.value = "";
+
 }
